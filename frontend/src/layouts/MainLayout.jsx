@@ -3,6 +3,8 @@ import NextLink from 'next/link';
 import React from 'react';
 import { FaStar, FaStore } from 'react-icons/fa';
 
+import Logo from '../components/Logo';
+
 export default function MainLayout({ children, selection }) {
   return (
     <Box display={{ md: 'flex' }} minH="100vh" bgColor="background">
@@ -11,10 +13,10 @@ export default function MainLayout({ children, selection }) {
         color="white"
         display={{ base: 'none', md: 'block' }}
       >
-        <Text fontSize="xl" p="7" fontWeight="bold">
-          <chakra.span color="primary">Monkey</chakra.span>
-          Games
-        </Text>
+        <Box pl="3" py="7">
+          <Logo />
+        </Box>
+
         <UnorderedList ml="0">
           {[
             {
@@ -30,7 +32,7 @@ export default function MainLayout({ children, selection }) {
           ].map((e) => (
             <NextLink href={e.link}>
               <ListItem
-                _hover={{ bgColor: 'primary' }}
+                _hover={{ bgColor: 'primaryVariant' }}
                 bgColor={e.link === selection ? 'primary' : null}
                 listStyleType="none"
                 p="3"

@@ -8,7 +8,7 @@ export default function RatingBadge({ children, size }) {
   return (
     <>
       {size === 'lg' && (
-        <Flex bgColor="#1c2c3b" p="1.5" borderRadius="2xl" w="100%">
+        <Flex bgColor="surfaceVariant" p="1.5" borderRadius="2xl" w="100%">
           <Center bgColor="#92d33e" w="40px" h="40px" borderRadius="xl">
             <Icon as={BsEmojiSmile} color="black" fontSize="20" />
           </Center>

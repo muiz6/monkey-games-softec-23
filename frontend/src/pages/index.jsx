@@ -1,9 +1,9 @@
+import { Box } from '@chakra-ui/react';
 import React from 'react';
 
-import MainLayout from '../components/MainLayout';
+import MainLayout from '../layouts/MainLayout';
 import HeroSection from '../components/homePage/HeroSection';
 import PopularSection from '../components/homePage/PopularSection';
-import { Box } from '@chakra-ui/react';
 
 export default function Home() {
   return (

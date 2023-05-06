@@ -3,7 +3,7 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 
-import DashboardLayout from '../../../../components/DashboardLayout';
+import DashboardLayout from '../../../../layouts/DashboardLayout';
 
 export default function DashboardCustomerPage() {
   return (

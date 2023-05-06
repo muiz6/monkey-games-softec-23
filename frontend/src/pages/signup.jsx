@@ -3,12 +3,15 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 
+import Logo from '../components/Logo';
+import MyButton from '../components/MyButton';
+
 export default function BusinessHomePage() {
   return (
-    <chakra.section display={{ md: 'flex' }} minH="100vh">
+    <chakra.section display={{ md: 'flex' }} minH="100vh" background="background" color="white">
       <Box w={{ md: '50%' }}>
         <Box p="5">
-          <Text as="h1" fontSize="xl">MyApp</Text>
+          <Logo />
         </Box>
         <Box p="5">
           <Text as="h2" fontSize="3xl" fontWeight="bold">Create your account</Text>
@@ -26,8 +29,8 @@ export default function BusinessHomePage() {
           </Flex>
 
           <Input placeholder="Password*" mt="5" />
-          <Input placeholder="Confirm Password*" mt="5" />
-          <Button mt="8" w="100%" type="button">Sign up</Button>
+          <Input placeholder="Confirm Password*" mt="5" mb="8" />
+          <MyButton size="lg">Sign up</MyButton>
         </Box>
       </Box>
       <Box

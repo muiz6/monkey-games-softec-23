@@ -3,14 +3,13 @@ import React from 'react';
 
 import ProductDetailSection from '../../components/productPage/ProductDetailSection';
 import ReviewSection from '../../components/productPage/ReviewSection';
-import NavBar from '../../components/NavBar';
+import BasicLayout from '../../layouts/BasicLayout';
 
-export default function Products() {
+export default function ProductDetailPage() {
   return (
-    <Box bgColor="background" color="white">
-      <NavBar />
+    <BasicLayout>
       <ProductDetailSection />
       <ReviewSection />
-    </Box>
+    </BasicLayout>
   );
 }
