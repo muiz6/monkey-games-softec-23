@@ -7,7 +7,7 @@ import { Box } from '@chakra-ui/react';
 
 export default function Home() {
   return (
-    <MainLayout>
+    <MainLayout selection="/">
       <HeroSection />
       <PopularSection />
       <Box h="100px" />

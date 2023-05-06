@@ -5,7 +5,7 @@ export default function MyButton({ children, size }) {
   return (
     <>
       {size === 'lg' && (
-        <Button bgColor="secondary" _hover={{ bgColor: 'secondaryVariant' }} borderRadius="xl" w="100%" h="auto">
+        <Button bgColor="secondary" _hover={{ bgColor: 'secondaryVariant' }} borderRadius="xl" w="100%" h="auto" p="3">
           {children}
         </Button>
       )}

@@ -1,9 +1,9 @@
-import { Box, chakra, ListIcon, ListItem, Text, UnorderedList } from '@chakra-ui/react';
+import { Box, chakra, Flex, ListItem, Text, UnorderedList, Icon } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
-import { FaHome } from 'react-icons/fa';
+import { FaStar, FaStore } from 'react-icons/fa';
 
-export default function MainLayout({ children }) {
+export default function MainLayout({ children, selection }) {
   return (
     <Box display={{ md: 'flex' }} minH="100vh" bgColor="background">
       <Box
@@ -15,33 +15,31 @@ export default function MainLayout({ children }) {
           <chakra.span color="primary">Monkey</chakra.span>
           Games
         </Text>
-        <UnorderedList p="4" ml="0">
+        <UnorderedList ml="0">
           {[
             {
-              Icon: FaHome,
-              link: '/business/dashboard/inventory',
+              Icon: FaStore,
+              link: '/',
               title: 'Store',
             },
             {
-              Icon: FaHome,
-              link: '/business/dashboard/orders',
-              title: 'Orders',
-            },
-            {
-              Icon: FaHome,
-              link: '/business/dashboard/customers',
-              title: 'Customers',
-            },
-            {
-              Icon: FaHome,
-              link: '/business/dashboard/queries',
-              title: 'Queries',
+              Icon: FaStar,
+              link: '/favourites',
+              title: 'Favourites',
             },
           ].map((e) => (
             <NextLink href={e.link}>
-              <ListItem _hover={{ bgColor: '#ffffff20' }} listStyleType="none" p="3" borderRadius="xl">
-                <ListIcon as={e.Icon} />
-                {e.title}
+              <ListItem
+                _hover={{ bgColor: 'primary' }}
+                bgColor={e.link === selection ? 'primary' : null}
+                listStyleType="none"
+                p="3"
+                borderRightRadius="full"
+              >
+                <Flex justifyContent="space-between" alignItems="center">
+                  {e.title}
+                  <Icon as={e.Icon} />
+                </Flex>
               </ListItem>
             </NextLink>
           ))}

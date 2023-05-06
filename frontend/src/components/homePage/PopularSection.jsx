@@ -7,7 +7,7 @@ export default function PopularSection() {
     <chakra.section color="white" px="5">
       <Box>
         <Text fontSize="2xl" fontWeight="bold">Popular Games</Text>
-        <Box display={{ md: 'flex' }} mx="-2.5">
+        <Box display={{ md: 'flex' }} mx="-2.5" mt="5">
           {Array.from({ length: 4 }).map(() => (
             <Box p="2.5">
               <ProductItem />
