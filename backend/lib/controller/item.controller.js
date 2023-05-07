@@ -44,6 +44,7 @@ module.exports.getItems = async (req, res, next) => {
       limit: 10,
       offset: (pageno - 1) * 10,
       attributes: [
+        'id',
         'name',
         'description',
         'price',
@@ -77,6 +78,7 @@ module.exports.getItemDetails = async (req, res, next) => {
   try {
     const item = await Item.findByPk(id, {
       attributes: [
+        'id',
         'name',
         'description',
         'price',
