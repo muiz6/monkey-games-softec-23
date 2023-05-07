@@ -1,4 +1,4 @@
-const { Item, Gear, Game } = require('../db/model');
+const { Item, Gear, Game, Review } = require('../db/model');
 const { responseHelper } = require('../helper/responseHelper');
 module.exports.createItem = async (req, res, next) => {
   const {
@@ -10,6 +10,7 @@ module.exports.createItem = async (req, res, next) => {
       type,
       platform,
       category,
+      ageLimit = null,
     },
     files,
   } = req;
@@ -24,10 +25,12 @@ module.exports.createItem = async (req, res, next) => {
       images,
     });
     const subModel = type === 'game' ? Game : Gear;
+    const age = ageLimit ? { ageLimit } : {};
     const metadata = await subModel.create({
       itemId: item.dataValues.id,
       platform,
       category,
+      ...age,
     });
     return responseHelper(res, 200, 'Item created successfully', item);
   } catch (error) {
@@ -43,6 +46,15 @@ module.exports.getItems = async (req, res, next) => {
     const items = await Item.findAll({
       limit: 10,
       offset: (pageno - 1) * 10,
+      attributes: [
+        'id',
+        'name',
+        'description',
+        'price',
+        'inventoryCount',
+        'images',
+        'type',
+      ],
       include: [
         {
           model: Game,
@@ -59,6 +71,43 @@ module.exports.getItems = async (req, res, next) => {
     return responseHelper(res, 200, 'Items fetched successfully', items);
   } catch (error) {
     responseHelper(res, 500, 'Failed to get data');
+  }
+};
+
+module.exports.getItemDetails = async (req, res, next) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const item = await Item.findByPk(id, {
+      attributes: [
+        'id',
+        'name',
+        'description',
+        'price',
+        'inventoryCount',
+        'images',
+        'type',
+      ],
+      include: [
+        {
+          model: Game,
+          attributes: ['platform', 'category'],
+          as: 'game',
+        },
+        {
+          model: Gear,
+          attributes: ['platform', 'category'],
+          as: 'gear',
+        },
+        {
+          model: Review,
+        },
+      ],
+    });
+    return responseHelper(res, 200, 'Item fetched successfully', item);
+  } catch (error) {
+    responseHelper(res, 500, 'unable to get data!');
   }
 };
 

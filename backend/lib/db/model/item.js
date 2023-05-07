@@ -22,6 +22,9 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.Favourite, {
         foreignKey: 'productId',
       });
+      this.hasMany(models.Review, {
+        foreignKey: 'productId',
+      });
     }
   }
   Item.init(

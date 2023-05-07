@@ -1,7 +1,7 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Order extends Model {
+  class Review extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -9,10 +9,22 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.Item, {
+        foreignKey: 'productId',
+      });
     }
   }
-  Order.init(
+  Review.init(
     {
+      productId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'Items',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      },
       userId: {
         type: DataTypes.INTEGER,
         references: {
@@ -22,27 +34,13 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       },
-      paymentId: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'Payments',
-          key: 'id',
-        },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
-      },
-      itemId: {
-        type: DataTypes.JSON,
-      },
-      orderStatus: {
-        type: DataTypes.STRING,
-        defaultValue: 'COMPLETED',
-      },
+      stars: DataTypes.INTEGER,
+      comment: DataTypes.STRING,
     },
     {
       sequelize,
-      modelName: 'Order',
+      modelName: 'Review',
     }
   );
-  return Order;
+  return Review;
 };

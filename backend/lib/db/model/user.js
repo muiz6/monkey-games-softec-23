@@ -18,6 +18,8 @@ module.exports = (sequelize, DataTypes) => {
       dob: DataTypes.DATE,
       gender: DataTypes.ENUM('male', 'female'),
       address: DataTypes.STRING,
+      isBlacklisted: DataTypes.BOOLEAN,
+      predictedAge: DataTypes.INTEGER,
     },
     {
       sequelize,
