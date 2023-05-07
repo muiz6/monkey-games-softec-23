@@ -28,13 +28,7 @@ module.exports = {
         onUpdate: 'CASCADE',
       },
       itemId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Items',
-          key: 'id',
-        },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+        type: Sequelize.JSON,
       },
       orderStatus: {
         type: Sequelize.STRING,

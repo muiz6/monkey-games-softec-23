@@ -26,14 +26,17 @@ const {
   createItem,
   getItems,
   deleteItem,
+  getItemDetails,
 } = require('../controller/item.controller');
+const { verifyTokenUser } = require('../services/jwt');
 
 const router = express.Router();
 
 router
   .post('/signin', signIn)
-  .post('/item', upload.array('images', 10), createItem)
+  .post('/item', verifyTokenUser, upload.array('images', 10), createItem)
   .get('/item/:pageno', getItems)
-  .delete('/item/:id', deleteItem);
+  .get('/item/details/:id', getItemDetails)
+  .delete('/item/:id', verifyTokenUser, deleteItem);
 
 module.exports = router;
