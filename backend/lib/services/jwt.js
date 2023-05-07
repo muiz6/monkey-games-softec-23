@@ -14,3 +14,13 @@ module.exports.verifyTokenUser = (req, res, next) => {
     responseHelper(res, 500, 'Invalid token received');
   }
 };
+
+// module.exports.verifyTokenUser = (req, res, next) => {
+//   try {
+//     const data = jwt.verify(req.headers.token, secret);
+//     req['user'] = data;
+//     next();
+//   } catch (error) {
+//     responseHelper(res, 500, 'Invalid token received');
+//   }
+// };
