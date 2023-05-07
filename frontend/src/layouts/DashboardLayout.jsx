@@ -1,4 +1,4 @@
-import { Box, ListIcon, ListItem, Text, UnorderedList } from '@chakra-ui/react';
+import { Box, ListIcon, ListItem, UnorderedList } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import { FaHome } from 'react-icons/fa';
@@ -17,7 +17,9 @@ export default function DashboardLayout({ children }) {
         display={{ base: 'none', md: 'block' }}
       >
         <Box p="7">
-          <Logo />
+          <NextLink href="/business/dashboard/inventory">
+            <Logo />
+          </NextLink>
         </Box>
         <UnorderedList p="4" ml="0">
           {[

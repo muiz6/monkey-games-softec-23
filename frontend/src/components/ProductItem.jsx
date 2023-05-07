@@ -22,7 +22,7 @@ export default function ProductItem({ favourite }) {
           <Icon as={favourite ? AiFillStar : AiOutlineStar} color="black" />
         </Center>
 
-        <Image src="/assets/img/product.jpg" borderRadius="xl" />
+        <Image src="/assets/img/product.jpg" borderRadius="xl" w="100%" />
       </Box>
       <Box mt="3">
         <Text fontWeight="bold">Title</Text>
