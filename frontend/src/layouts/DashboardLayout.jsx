@@ -2,6 +2,9 @@ import { Box, ListIcon, ListItem, Text, UnorderedList } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React from 'react';
 import { FaHome } from 'react-icons/fa';
+import { BsFillPersonFill, BsMailbox2, BsCardChecklist } from 'react-icons/bs';
+
+import Logo from '../components/Logo';
 
 export default function DashboardLayout({ children }) {
   return (
@@ -13,7 +16,9 @@ export default function DashboardLayout({ children }) {
         color="white"
         display={{ base: 'none', md: 'block' }}
       >
-        <Text fontSize="xl" p="7">MyApp</Text>
+        <Box p="7">
+          <Logo />
+        </Box>
         <UnorderedList p="4" ml="0">
           {[
             {
@@ -22,17 +27,17 @@ export default function DashboardLayout({ children }) {
               title: 'Inventory',
             },
             {
-              Icon: FaHome,
+              Icon: BsCardChecklist,
               link: '/business/dashboard/orders',
               title: 'Orders',
             },
             {
-              Icon: FaHome,
+              Icon: BsFillPersonFill,
               link: '/business/dashboard/customers',
               title: 'Customers',
             },
             {
-              Icon: FaHome,
+              Icon: BsMailbox2,
               link: '/business/dashboard/queries',
               title: 'Queries',
             },

@@ -2,6 +2,7 @@ import {
   Box, chakra, Input, Text, useToast,
 } from '@chakra-ui/react';
 import React, { useRef } from 'react';
+import { useRouter } from 'next/router';
 
 import Logo from '../components/Logo';
 import MyButton from '../components/MyButton';
@@ -9,6 +10,7 @@ import * as repository from '../services/repository';
 
 export default function BusinessHomePage() {
   const toast = useToast();
+  const router = useRouter();
 
   const refEmail = useRef(null);
   const refPassword = useRef(null);
@@ -21,6 +23,7 @@ export default function BusinessHomePage() {
       await repository.logUserIn({
         email, password,
       });
+      await router.replace('/');
     } else {
       toast({
         status: 'error',
@@ -41,8 +44,8 @@ export default function BusinessHomePage() {
           <Text as="h2" fontSize="3xl" fontWeight="bold">Welcome back</Text>
           <Text fontSize="sm">Enter your details</Text>
           <Input placeholder="Email" mt="32" ref={refEmail} />
-          <Input placeholder="Password" my="5" ref={refPassword} />
-          <MyButton size="lg">Log In</MyButton>
+          <Input placeholder="Password" my="5" ref={refPassword} type="password" />
+          <MyButton size="lg" onClick={handleLogin}>Log In</MyButton>
         </Box>
       </Box>
       <Box
@@ -50,7 +53,6 @@ export default function BusinessHomePage() {
         backgroundImage="url(/assets/img/login-bg.jpg)"
         bgSize="cover"
         borderLeftRadius="3xl"
-        onClick={handleLogin}
       />
     </chakra.section>
   );
