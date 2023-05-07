@@ -1,11 +1,19 @@
-import { Box, chakra, Flex, ListItem, Text, UnorderedList, Icon } from '@chakra-ui/react';
+import { Box, chakra, Flex, ListItem, Text, UnorderedList, Icon, } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaStar, FaStore } from 'react-icons/fa';
 
 import Logo from '../components/Logo';
+import * as repository from '../services/repository';
+import MyButton from '../components/MyButton';
 
 export default function MainLayout({ children, selection }) {
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState();
+
+  useEffect(() => {
+    setIsUserLoggedIn(Boolean(repository.getUser()) || false);
+  }, []);
+
   return (
     <Box display={{ md: 'flex' }} minH="100vh" bgColor="background">
       <Box
@@ -14,7 +22,9 @@ export default function MainLayout({ children, selection }) {
         display={{ base: 'none', md: 'block' }}
       >
         <Box pl="3" py="7">
-          <Logo />
+          <NextLink href="/">
+            <Logo />
+          </NextLink>
         </Box>
 
         <UnorderedList ml="0">
@@ -46,6 +56,13 @@ export default function MainLayout({ children, selection }) {
             </NextLink>
           ))}
         </UnorderedList>
+        {isUserLoggedIn === false && (
+          <Box mt="10" pl="5">
+            <NextLink href="/login">
+              <MyButton size="lg">SIGN IN</MyButton>
+            </NextLink>
+          </Box>
+        )}
       </Box>
       <Box w={{ md: '80%' }}>{children}</Box>
     </Box>

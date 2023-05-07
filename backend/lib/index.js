@@ -8,7 +8,9 @@ const orderRouter = require('./routes/order.routes');
 const reviewsRouter = require('./routes/reviews.routes');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  exposedHeaders: 'token',
+}));
 app.use(express.json());
 app.use('/auth', userRouter);
 app.use('/admin', adminRouter);

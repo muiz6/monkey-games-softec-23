@@ -6,6 +6,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 
 import ProductItem from './ProductItem';
 import MyButton from './MyButton';
+// import {useAppViewModel} from '@';
 
 export default function Cart({ onClose }) {
   return (

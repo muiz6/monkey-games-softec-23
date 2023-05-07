@@ -7,7 +7,7 @@ import Container from '../Container';
 import MyButton from '../MyButton';
 import Stars from '../Stars';
 
-export default function ProductDetailSection() {
+export default function ProductDetailSection({ product, onAddToCart }) {
   return (
     <chakra.section px="5">
       <Container display="flex">
@@ -22,13 +22,13 @@ export default function ProductDetailSection() {
           </Flex>
         </Box>
         <Box ml="5" w="50%">
-          <Text fontSize="3xl" fontWeight="bold" mb="3">Title</Text>
+          <Text fontSize="3xl" fontWeight="bold" mb="3">{product.name}</Text>
           <Stars stars="5" />
-          <Text fontSize="3xl" fontWeight="bold" mt="5">PKR 6000</Text>
+          <Text fontSize="3xl" fontWeight="bold" mt="5">PKR {product.price}</Text>
           <Text textAlign="justify" my="5">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            {product.description}
           </Text>
-          <MyButton size="lg">ADD TO CART</MyButton>
+          <MyButton size="lg" onClick={onAddToCart}>ADD TO CART</MyButton>
         </Box>
       </Container>
     </chakra.section>
