@@ -22,30 +22,15 @@ module.exports.getCartItems = async (req, res, next) => {
     user: { id },
   } = req;
   try {
-    const items = await Cart.findAll({
-      where: {
-        userId: id,
-        // orderId: null,
-      },
-      // attributes: ['quantity', 'productId'],
-      include: [
-        {
-          model: Item,
-          attributes: ['id', 'name', 'images', 'description', 'price'],
-        },
-      ],
-    });
+    const [items] = await sequelize.query(
+      'SELECT `Cart`.`quantity`, `Items`.`id` AS `id`, `Items`.`name` AS `name`, `Items`.`images` AS `images`, `Items`.`description` AS `description`,`Items`.`price` AS `price` FROM `Carts` AS `Cart` LEFT OUTER JOIN `Items` AS `Items` ON `Cart`.`productId` = `Items`.`id` WHERE `Cart`.`userId` =' +
+        id
+    );
     let total = 0;
     const flatItems = items?.length
-      ? items.map(({ dataValues: { quantity, Items } }) => {
-          total += quantity * Items[0].price;
-          return {
-            quantity,
-            item: Items[0],
-          };
-        })
+      ? items.forEach((item) => (total = item.price * item.quantity))
       : [];
-    responseHelper(res, 200, 'Items found', { total, items: flatItems });
+    responseHelper(res, 200, 'Items found', { total, items });
   } catch (error) {
     responseHelper(res, 500, 'Unable to process the request');
   }
