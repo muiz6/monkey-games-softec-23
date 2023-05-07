@@ -10,6 +10,7 @@ module.exports.createItem = async (req, res, next) => {
       type,
       platform,
       category,
+      ageLimit = null,
     },
     files,
   } = req;
@@ -24,10 +25,12 @@ module.exports.createItem = async (req, res, next) => {
       images,
     });
     const subModel = type === 'game' ? Game : Gear;
+    const age = ageLimit ? { ageLimit } : {};
     const metadata = await subModel.create({
       itemId: item.dataValues.id,
       platform,
       category,
+      ...age,
     });
     return responseHelper(res, 200, 'Item created successfully', item);
   } catch (error) {

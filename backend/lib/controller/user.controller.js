@@ -38,3 +38,16 @@ module.exports.signUp = async (req, res, next) => {
     return responseHelper(res, 500, 'Unable to create user');
   }
 };
+
+module.exports.updatePredictedAge = async (req, res, next) => {
+  try {
+    const {
+      body: { age },
+      user: { id },
+    } = req;
+    const updatedUser = await User.update({ id }, { predictedAge: age });
+    responseHelper(res, 200, 'user updated!', updatedUser);
+  } catch (error) {
+    responseHelper(res, 500, 'Unable to set preficted age');
+  }
+};

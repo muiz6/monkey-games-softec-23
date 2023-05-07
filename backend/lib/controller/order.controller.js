@@ -4,8 +4,11 @@ const { Cart, Item, Payment, Order } = require('../db/model');
 module.exports.createOrder = async (req, res, next) => {
   const {
     body: { cvv, cardNumber, cardName, cardExpiry, paymentData, paymentStatus },
-    user: { id },
+    user: { id, isBlacklisted },
   } = req;
+  if (isBlacklisted) {
+    throw new Error('You are blacklisted from buying!');
+  }
   try {
     const cartProducts = await Cart.findAll({
       where: { userId: id },

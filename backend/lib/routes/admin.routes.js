@@ -21,7 +21,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // const upload = multer({ storage });
-const { signIn } = require('../controller/admin.controller');
+const {
+  signIn,
+  blackListSwitch,
+  getUsers,
+} = require('../controller/admin.controller');
 const {
   createItem,
   getItems,
@@ -36,6 +40,8 @@ router
   .post('/signin', signIn)
   .post('/item', verifyTokenUser, upload.array('images', 10), createItem)
   .get('/item/:pageno', getItems)
+  .get('/', verifyTokenUser, getUsers)
+  .patch('/:id', verifyTokenUser, blackListSwitch)
   .get('/item/details/:id', getItemDetails)
   .delete('/item/:id', verifyTokenUser, deleteItem);
 
