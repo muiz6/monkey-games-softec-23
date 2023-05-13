@@ -8,4 +8,6 @@ RUN yarn install
 
 COPY . .
 
+CMD npx sequelize-cli db:migrate
+
 CMD yarn run dev

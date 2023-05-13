@@ -19,5 +19,6 @@ services:
     platform: linux/amd64
     environment:
       MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: database_development
     ports:
       - "3306:3306"
